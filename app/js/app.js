@@ -2,7 +2,7 @@ window.onload = function (){
     //分享朋友
     function shareFriend(){
         var url = encodeURIComponent(window.location.href);
-        var shareImg = "http://h5.hking.top/KS2019/images/share.jpg";
+        var shareImg = "http://h5.hking.top/KS2019/images/share.png";
         var link = 'http://h5.hking.top/jssdk.php?url='+url;
         $.ajax({
             //api路劲
@@ -39,26 +39,44 @@ window.onload = function (){
                     wx.onMenuShareTimeline(share_config.share);//分享到朋友圈
                     wx.onMenuShareQQ(share_config.share);//分享给手机QQ
                     const Video = document.querySelector("#container video")
-                    let Duration = null
+                    const Audio = document.querySelector("#audio")
                     Video.play()
+                    Audio.play()
+
+                    // // 监听视频是否还在加载
+                    // $("#audio").on("durationchange",function (){
+                    //     $(".loading div").text("音乐还在加载中........")
+                    //     // Video.pause()
+                    //     Audio.pause()
+                    // })
+
+                    // 监听视频是否还在加载
                     $("#container video").on("durationchange",function (){
-                        $(".duration p").text("durationchange事件")
+                        $(".loading div").text("视频还在加载中........")
                         Video.pause()
                     })
+
+                    // // 监听音乐是否可以连续播放
+                    // $("#audio").on("canplaythrough",function (){
+                    //     $(".loading div").text("音乐可以连续播放了！")
+                    //     Video.play()
+                    // })
+
+                    // 监听视频是否可以连续播放
                     $("#container video").on("canplaythrough",function (){
-                        $(".duration p").text("canplaythrough事件")
+                        $(".loading").hide()
+                        $(".loading div").text("视频可以连续播放了！")
+                        $(".video-list").show()
                         Video.play()
-                        Duration = Video.duration
+                        Audio.pause()
                     })
 
-                    $("#container video").on("timeupdate",function (){
-                        $(".duration p").text("timeupdate")
-                        if (Video.currentTime >= Duration){
-                            $(".duration p").text("播放完毕")
-                            Video.pause()
-                        }
-                        Duration = Video.duration
-                    })
+                    Video.addEventListener("ended",function(){
+                        Audio.play()
+                        $(".video-list").hide()
+                        $(".loading").show()
+                        $(".loading div").text('视频播放完毕！切换播放音乐')
+                   })
                 });
                 wx.error(function (res) {
                     console.info(res);
