@@ -23,18 +23,25 @@
     <div id="container">
         <audio id="audio" src="./music/bg.mp3" preload></audio>
         <div class="loading position">
-            <div>加载中.....</div>
-            <!-- <canvas id="myCanvas">当前浏览器不支持canvas组件请升级！</canvas> -->
+            <div id="myCanvas">
+                <canvas>当前浏览器不支持canvas组件请升级！</canvas>
+            </div>
         </div>
+        <div id="guide"></div>
         <div class="video-list position">
-            <video src="./video/2_2.mp4" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true"></video>
+            <video autobufer="true" playsinline=""
+                   preload="auto" src="./video/2_2.mp4"
+                   webkit-playsinline="true" x-webkit-airplay="allow"
+                   x5-video-orientation="portrait" x5-video-player-fullscreen="true"
+                   x5-video-player-type="h5"></video>
             <!-- <video src="./video/2_2.mp4" webkit-playsinline="" playsinline="" x5-playsinline="" x-webkit-airplay="allow"></video> -->
         </div>
         <!-- 场景-one -->
-        <div id="scene-one" class="scene-one-container swiper">
+        <div id="BossKai" class="boss-kai-container swiper">
             <section class="swiper-wrapper scene-wrapper">
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
+                        <div class="phototemplate"></div>
                         <div class="scene-one-slide1 glasses">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
@@ -51,15 +58,16 @@
                                     <div class="glasses-min">7</div>
                                     <div class="glasses-min">8</div>
                                     <div class="glasses-min">9</div>
-                                </div>      
+                                </div>
                             </div>
-                            <div class="swiper-button-prev"></div><!--左箭头-->
-                            <div class="swiper-button-next"></div><!--右箭头-->
                         </div>
+                        <div class="glasses-button glasses-button-prev slide1-prev"></div><!--左箭头-->
+                        <div class="glasses-button glasses-button-next slide1-next"></div><!--右箭头-->
                     </section>
                 </div>
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
+                        <div class="phototemplate"></div>
                         <div class="scene-one-slide2 glasses">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
@@ -76,15 +84,16 @@
                                     <div class="glasses-min">7</div>
                                     <div class="glasses-min">8</div>
                                     <div class="glasses-min">9</div>
-                                </div>     
+                                </div>
                             </div>
-                            <div class="swiper-button-prev"></div><!--左箭头-->
-                            <div class="swiper-button-next"></div><!--右箭头-->
                         </div>
+                        <div class="glasses-button glasses-button-prev slide2-prev"></div><!--左箭头-->
+                        <div class="glasses-button glasses-button-next slide2-next"></div><!--右箭头-->
                     </section>
                 </div>
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
+                        <div class="phototemplate"></div>
                         <div class="scene-one-slide3 glasses">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
@@ -96,24 +105,24 @@
                                     <div class="glasses-min">4</div>
                                     <div class="glasses-min">5</div>
                                     <div class="glasses-min">6</div>
-                                </div> 
+                                </div>
                                 <div class="swiper-slide">
                                     <div class="glasses-min">7</div>
                                     <div class="glasses-min">8</div>
                                     <div class="glasses-min">9</div>
-                                </div>     
+                                </div>
                             </div>
-                            <div class="swiper-button-prev"></div><!--左箭头-->
-                            <div class="swiper-button-next"></div><!--右箭头-->
                         </div>
+                        <div class="glasses-button glasses-button-prev slide3-prev"></div><!--左箭头-->
+                        <div class="glasses-button glasses-button-next slide3-next"></div><!--右箭头-->
                     </section>
                 </div>
             </section>
             <div class="swiper-button-prev"></div><!--左箭头-->
             <div class="swiper-button-next"></div><!--右箭头-->  
         </div>
-        <!-- 场景-two -->
-        <div id="scene-two" class="scene-two-container swiper"">
+        <!-- 场景-two
+        <div id="SchoolLeaderKai" class="scene-two-container swiper">
             <section class="swiper-wrapper scene-wrapper">
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
@@ -135,8 +144,8 @@
                                     <div class="glasses-min">9</div>
                                 </div>      
                             </div>
-                            <div class="swiper-button-prev"></div><!--左箭头-->
-                            <div class="swiper-button-next"></div><!--右箭头-->
+                            <div class="swiper-button-prev"></div>&lt;!&ndash;左箭头&ndash;&gt;
+                            <div class="swiper-button-next"></div>&lt;!&ndash;右箭头&ndash;&gt;
                         </div>
                     </section>
                 </div>
@@ -161,8 +170,8 @@
                                     <div class="glasses-min">9</div>
                                 </div>      
                             </div>
-                            <div class="swiper-button-prev"></div><!--左箭头-->
-                            <div class="swiper-button-next"></div><!--右箭头-->
+                            <div class="swiper-button-prev"></div>&lt;!&ndash;左箭头&ndash;&gt;
+                            <div class="swiper-button-next"></div>&lt;!&ndash;右箭头&ndash;&gt;
                         </div>
 
                     </section>
@@ -188,16 +197,16 @@
                                     <div class="glasses-min">9</div>
                                 </div>      
                             </div>
-                            <div class="swiper-button-prev"></div><!--左箭头-->
-                            <div class="swiper-button-next"></div><!--右箭头-->
+                            <div class="swiper-button-prev"></div>&lt;!&ndash;左箭头&ndash;&gt;
+                            <div class="swiper-button-next"></div>&lt;!&ndash;右箭头&ndash;&gt;
                         </div>
 
                     </section>
                 </div>
             </section>
-            <div class="swiper-button-prev"></div><!--左箭头-->
-            <div class="swiper-button-next"></div><!--右箭头-->
-        </div>
+            <div class="swiper-button-prev"></div>&lt;!&ndash;左箭头&ndash;&gt;
+            <div class="swiper-button-next"></div>&lt;!&ndash;右箭头&ndash;&gt;
+        </div>-->
     </div>
 <script src="/js/app.js?v=2.9"></script>
 </body>

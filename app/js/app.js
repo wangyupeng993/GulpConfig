@@ -1,6 +1,6 @@
 window.onload = function (){
-    const container = document.querySelector('#container')
-    container.addEventListener('touchstart',function (e){e.preventDefault()},false)
+    /*const container = document.querySelector('#container')
+    container.addEventListener('touchstart',function (e){e.preventDefault()},false)*/
 
     //分享朋友
     function shareFriend(){
@@ -99,15 +99,17 @@ window.onload = function (){
         });
     };
 
-    // canvasLoading()
+    canvasLoading()
     function canvasLoading() {
-        const c = document.getElementById('myCanvas');
+        const myCanvas = document.querySelector('#myCanvas');
+        const c = document.querySelector('#myCanvas canvas');
         const ctx = c.getContext('2d');
-        const mW = c.width = 300;
-        const mH = c.height = 300;
-        const lineWidth = 5;
+        console.log($('#myCanvas').innerWidth())
+        const mW = c.width = $('#myCanvas').innerWidth() + 4;
+        const mH = c.height = $('#myCanvas').innerHeight() + 4;
+        const lineWidth = 4;
         const r = mW / 2; //中间位置
-        const cR = r - 4 * lineWidth; //圆半径
+        const cR = r - 0.5 * lineWidth; //圆半径
         const startAngle = -(1 / 2 * Math.PI); //开始角度
 
         const endAngle = startAngle + 2 * Math.PI; //结束角度
@@ -137,213 +139,221 @@ window.onload = function (){
             ctx.fillStyle = '#ffffff';
             ctx.font= fontSize + 'px Microsoft Yahei';
             ctx.textAlign='center';
-            // console.log( Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100))
-            ctx.fillText( Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100) + '%', r, r + fontSize / 2);
+            let loadtext = Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100)
+            if (loadtext >= 99){
+                loadtext = 99
+                $('.loading').hide()
+            }
+            ctx.fillText( loadtext + '%', r, r + fontSize / 2);
         
             requestAnimationFrame(rander);
         }
         rander()
     }
 
-    const sceneOneSwiper = new Swiper('.scene-one-container', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+    bossKai()
+    function bossKai(){
+        // boss凯滑屏
+        const sceneOneSwiper = new Swiper('.boss-kai-container', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    // this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
+        const sceneOneSlideOne = new Swiper('.scene-one-slide1', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.slide1-next',
+                prevEl: '.slide1-prev',
+            },
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
+        const sceneOneSlideTwo = new Swiper('.scene-one-slide2', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.slide2-next',
+                prevEl: '.slide2-prev',
+            },
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
+        const sceneOneSlideThree = new Swiper('.scene-one-slide3', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.slide3-next',
+                prevEl: '.slide3-prev',
+            },
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
+    }
 
-    // 场景一滑屏
-    const sceneTwoSwiper = new Swiper('.scene-two-container', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
-            },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
 
-    // 场景二滑屏
-    const sceneOneSlideOne = new Swiper('.scene-one-slide1', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+    SchoolLeaderKai()
+    function SchoolLeaderKai(){
+        // 学长凯滑屏
+        const sceneTwoSwiper = new Swiper('.scene-two-container', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
 
-    const sceneOneSlideTwo = new Swiper('.scene-one-slide2', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+        const sceneTwoSlideOne = new Swiper('.scene-two-slide1', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
 
-    const sceneOneSlideThree = new Swiper('.scene-one-slide3', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+        const sceneTwoSlideTwo = new Swiper('.scene-two-slide2', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
 
-    const sceneTwoSlideOne = new Swiper('.scene-two-slide1', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+        const sceneTwoSlideThree = new Swiper('.scene-two-slide3', {
+            // direction : 'vertical',
+            height: window.innerHeight,
+            autoplay: false,//可选选项，自动滑动
+            allowTouchMove: true,
+            updateOnImagesReady:true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
             },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
-
-    const sceneTwoSlideTwo = new Swiper('.scene-two-slide2', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
-            },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
-
-    const sceneTwoSlideThree = new Swiper('.scene-two-slide3', {
-        // direction : 'vertical',
-        height: window.innerHeight,
-        autoplay: false,//可选选项，自动滑动
-        allowTouchMove: true,
-        updateOnImagesReady:true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        on:{
-            //初始化
-            init: function(){
-                // shareFriend()
-                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
-            },
-            //上一页
-            slideChangeTransitionStart: function(){},
-            // 下一页结束
-            slideNextTransitionEnd:function (){},
-            // 上一页结束
-            slidePrevTransitionEnd:function (){}
-        }
-    });
+            on:{
+                //初始化
+                init: function(){
+                    // shareFriend()
+                    this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                },
+                //上一页
+                slideChangeTransitionStart: function(){},
+                // 下一页结束
+                slideNextTransitionEnd:function (){},
+                // 上一页结束
+                slidePrevTransitionEnd:function (){}
+            }
+        });
+    }
 }
