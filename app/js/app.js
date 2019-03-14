@@ -1,8 +1,11 @@
 window.onload = function (){
+    const container = document.querySelector('#container')
+    container.addEventListener('touchstart',function (e){e.preventDefault()},false)
+
     //分享朋友
     function shareFriend(){
         var url = encodeURIComponent(window.location.href);
-        var shareImg = "http://h5.hking.top/KS2019/images/share.png";
+        var shareImg = "http://h5.hking.top/CSVideo/images/share.png";
         var link = 'http://h5.hking.top/jssdk.php?url='+url;
         $.ajax({
             //api路劲
@@ -43,24 +46,18 @@ window.onload = function (){
                     Video.play()
                     Audio.play()
 
-                    // // 监听视频是否还在加载
-                    // $("#audio").on("durationchange",function (){
-                    //     $(".loading div").text("音乐还在加载中........")
-                    //     // Video.pause()
-                    //     Audio.pause()
-                    // })
-
                     // 监听视频是否还在加载
                     $("#container video").on("durationchange",function (){
                         $(".loading div").text("视频还在加载中........")
                         Video.pause()
                     })
 
-                    // // 监听音乐是否可以连续播放
-                    // $("#audio").on("canplaythrough",function (){
-                    //     $(".loading div").text("音乐可以连续播放了！")
-                    //     Video.play()
-                    // })
+                    $(document).on('touchstart',function (){
+                        Video.play()
+                        alert(123456789)
+                        $('.loading').hide()
+                        $('.video-list').show()
+                    })
 
                     // 监听视频是否可以连续播放
                     $("#container video").on("canplaythrough",function (){
@@ -101,6 +98,53 @@ window.onload = function (){
 
         });
     };
+
+    // canvasLoading()
+    function canvasLoading() {
+        const c = document.getElementById('myCanvas');
+        const ctx = c.getContext('2d');
+        const mW = c.width = 300;
+        const mH = c.height = 300;
+        const lineWidth = 5;
+        const r = mW / 2; //中间位置
+        const cR = r - 4 * lineWidth; //圆半径
+        const startAngle = -(1 / 2 * Math.PI); //开始角度
+
+        const endAngle = startAngle + 2 * Math.PI; //结束角度
+        const xAngle = 1 * (Math.PI / 180); //偏移角度量
+        const fontSize = 35; //字号大小
+        let tmpAngle = startAngle; //临时角度变量
+
+        var rander = function(){
+            if(tmpAngle >= endAngle){
+              return;
+            }else if(tmpAngle + xAngle > endAngle){
+              tmpAngle = endAngle;
+            }else{
+              tmpAngle += xAngle;
+            }
+            ctx.clearRect(0, 0, mW, mH);
+        
+            //画圈
+            ctx.beginPath();
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = '#ffffff';
+            ctx.arc(r, r, cR, startAngle, tmpAngle);
+            ctx.stroke();
+            ctx.closePath();
+        
+            //写字
+            ctx.fillStyle = '#ffffff';
+            ctx.font= fontSize + 'px Microsoft Yahei';
+            ctx.textAlign='center';
+            // console.log( Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100))
+            ctx.fillText( Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100) + '%', r, r + fontSize / 2);
+        
+            requestAnimationFrame(rander);
+        }
+        rander()
+    }
+
     const sceneOneSwiper = new Swiper('.scene-one-container', {
         // direction : 'vertical',
         height: window.innerHeight,
@@ -114,7 +158,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -140,7 +184,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -166,7 +210,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -191,7 +235,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -216,7 +260,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -241,7 +285,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -266,7 +310,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
@@ -291,7 +335,7 @@ window.onload = function (){
         on:{
             //初始化
             init: function(){
-                shareFriend()
+                // shareFriend()
                 this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
