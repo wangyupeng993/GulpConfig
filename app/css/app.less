@@ -147,18 +147,66 @@ html,body{
     border-radius:50%;
     margin:-206/@rem auto 0;
     canvas{
-      margin-left:-2.5/@rem;
-      margin-top:-2.5/@rem;
+      margin-left:-1.7/@rem;
+      margin-top:-1.7/@rem;
     }
    }
 }
 
 #guide{
+  position:relative;
   width:100vw;
   height:100vh;
   background:url(../images/BootPage/bg.jpg) no-repeat center center;
   background-size:cover;
-  display:none;
+  section{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:1154/@rem;
+    .School-leader,.bosss-kai{
+      position:absolute;
+      bottom:0;
+    }
+    .bosss-kai{
+      left:0;
+      width:437/@rem;
+      height:1153/@rem;
+      background:url(../images/BootPage/boss-kai.png) no-repeat center center;
+      background-size:cover;
+    }
+    .School-leader{
+      right:0;
+      width:497/@rem;
+      height:1104/@rem;
+      background:url(../images/BootPage/Schoolleader.png) no-repeat center center;
+      background-size:cover;
+
+    }
+    .bosss-button,.School-button{
+      position:absolute;
+      width:410/@rem;
+      height:127/@rem;
+      line-height:127/@rem;
+      font-size:42/@rem;
+      color:#fff;
+      text-align:center;
+    }
+    .bosss-button{
+      left:0;
+      top:506/@rem;
+      transform:skewY(-20deg);
+      background:#404a63 url(../images/BootPage/icon1.png) no-repeat 306/@rem center;
+      background-size:50/@rem 50/@rem;
+    }
+    .School-button{
+      right:0;
+      bottom:386/@rem;
+      background:#b39f8c;
+      transform:skewY(-20deg);
+    }
+  }
 }
 
 .video-list{
@@ -166,6 +214,7 @@ html,body{
 }
 
 #BossKai{
+  display:none;
   .scene-wrapper{
     .scene-slide:nth-of-type(1){
       background:url(../images/scene_one/11.jpg) no-repeat center center;

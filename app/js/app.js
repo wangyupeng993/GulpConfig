@@ -104,7 +104,6 @@ window.onload = function (){
         const myCanvas = document.querySelector('#myCanvas');
         const c = document.querySelector('#myCanvas canvas');
         const ctx = c.getContext('2d');
-        console.log($('#myCanvas').innerWidth())
         const mW = c.width = $('#myCanvas').innerWidth() + 4;
         const mH = c.height = $('#myCanvas').innerHeight() + 4;
         const lineWidth = 4;
@@ -126,7 +125,7 @@ window.onload = function (){
               tmpAngle += xAngle;
             }
             ctx.clearRect(0, 0, mW, mH);
-        
+
             //画圈
             ctx.beginPath();
             ctx.lineWidth = lineWidth;
@@ -134,7 +133,7 @@ window.onload = function (){
             ctx.arc(r, r, cR, startAngle, tmpAngle);
             ctx.stroke();
             ctx.closePath();
-        
+
             //写字
             ctx.fillStyle = '#ffffff';
             ctx.font= fontSize + 'px Microsoft Yahei';
@@ -145,7 +144,7 @@ window.onload = function (){
                 $('.loading').hide()
             }
             ctx.fillText( loadtext + '%', r, r + fontSize / 2);
-        
+
             requestAnimationFrame(rander);
         }
         rander()
