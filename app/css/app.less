@@ -36,6 +36,7 @@ input,button,select{
   -webkit-appearance: none;
   outline: none;
   padding:0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 html,body{
@@ -43,6 +44,47 @@ html,body{
   width:100vw;
   height:100vh;
   overflow:hidden;
+}
+
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse{
+  -webkit-animation: 1s pulse infinite linear;
+  -o-animation: 1s pulse infinite linear;
+  animation: 1s pulse infinite linear;
 }
 
 //定义字体大小
@@ -105,9 +147,22 @@ html,body{
   border-radius:6/@rem;
   overflow: hidden;
   .phototemplate{
+    position:relative;
     width:100%;
     height:787/@rem;
     overflow:hidden;
+    button{
+      position:absolute;
+      width:195/@rem;
+      height:210/@rem;
+      background:rgba(255,255,255,0) url(../images/public/button-upload.png) no-repeat;
+      background-size:cover;
+      input{
+        width:100%;
+        height:100%;
+        opacity:0;
+      }
+    }
   }
   .glasses{
     position:absolute;
@@ -121,18 +176,35 @@ html,body{
       display:flex;
       .glasses-min{
         width:155/@rem;
-        background-color:brown;
         height:100%;
         margin:0 10/@rem;
+        img{
+          width:100%;
+          height:100%;
+        }
       }
     }
   }
 }
-
-#container video{
-  width:100vw;
-  height:100vh;
-  object-fit: cover;
+//chioce-button
+#container{
+  .choice-button{
+    position:absolute;
+    bottom:98/@rem;
+    left:0;
+    width:100%;
+    height:78/@rem;
+    text-align: center;
+    display:none;
+    z-index:222;
+    button{
+      width:298/@rem;
+      height:78/@rem;
+      background:url(../images/public/button-choice.png) no-repeat;
+      background-size:cover;
+      margin:0 auto;
+    }
+  }
 }
 
 .loading{
@@ -159,6 +231,7 @@ html,body{
   height:100vh;
   background:url(../images/BootPage/bg.jpg) no-repeat center center;
   background-size:cover;
+  display:none;
   section{
     position:absolute;
     bottom:0;
@@ -185,48 +258,127 @@ html,body{
 
     }
     .bosss-button,.School-button{
-      position:absolute;
-      width:410/@rem;
-      height:127/@rem;
-      line-height:127/@rem;
-      font-size:42/@rem;
-      color:#fff;
+      display:none;
+      align-items: center;
       text-align:center;
+      div{
+        display:inline-block;
+        width:150/@rem;
+        height:100/@rem;
+        margin:0 auto;
+      }
     }
     .bosss-button{
+      position:absolute;
       left:0;
-      top:506/@rem;
-      transform:skewY(-20deg);
-      background:#404a63 url(../images/BootPage/icon1.png) no-repeat 306/@rem center;
-      background-size:50/@rem 50/@rem;
+      top:402/@rem;
+      width:404/@rem;
+      height:344/@rem;
+      background:url(../images/BootPage/boss-button.png) no-repeat center center;
+      background-size:cover;
     }
     .School-button{
+      position:absolute;
+      bottom:338/@rem;
       right:0;
-      bottom:386/@rem;
-      background:#b39f8c;
-      transform:skewY(-20deg);
+      width:429/@rem;
+      height:318/@rem;
+      background:url(../images/BootPage/School-button.png) no-repeat center center;
+      background-size:cover;
     }
   }
 }
 
 .video-list{
   display:none;
+  video{
+    width:100vw;
+    height:100vh;
+    object-fit: cover;
+    display:none;
+  }
 }
 
 #BossKai{
   display:none;
   .scene-wrapper{
     .scene-slide:nth-of-type(1){
+      background:url(../images/scene_four/44.jpg) no-repeat center center;
+      background-size:cover;
+      .boss-photo-frame{
+        background:url(../images/scene_four/d1.jpg) no-repeat center center;
+        background-size:cover;
+        button{
+          right:12%;
+          top:47%;
+        }
+      }
+    }
+    .scene-slide:nth-of-type(2){
+      background:url(../images/scene_five/55.jpg) no-repeat center center;
+      background-size:cover;
+      .boss-photo-frame{
+        background:url(../images/scene_five/e1.jpg) no-repeat center center;
+        background-size:cover;
+        button{
+          left:12.5%;
+          top:44%;
+        }
+      }
+    }
+    .scene-slide:nth-of-type(3){
+      background:url(../images/scene_six/66.jpg) no-repeat center center;
+      background-size:cover;
+      .boss-photo-frame{
+        background:url(../images/scene_six/f1.jpg) no-repeat center center;
+        background-size:cover;
+        button{
+          right:11%;
+          top:42%;
+        }
+      }
+    }
+  }
+}
+
+#SchoolLeaderKai{
+  display:none;
+  .scene-wrapper{
+    .scene-slide:nth-of-type(1){
       background:url(../images/scene_one/11.jpg) no-repeat center center;
       background-size:cover;
+      .school-photo-frame{
+        background:url(../images/scene_one/a1.jpg) no-repeat center center;
+        background-size:cover;
+        button{
+          left:12%;
+          top:40%;
+        }
+      }
     }
     .scene-slide:nth-of-type(2){
       background:url(../images/scene_two/22.jpg) no-repeat center center;
       background-size:cover;
+      .school-photo-frame{
+        background:url(../images/scene_two/b1.jpg) no-repeat center center;
+        background-size:cover;
+        button{
+          right:9%;
+          top:41%;
+        }
+      }
     }
     .scene-slide:nth-of-type(3){
       background:url(../images/scene_three/33.jpg) no-repeat center center;
       background-size:cover;
+      .school-photo-frame{
+        background:url(../images/scene_three/c1.jpg) no-repeat center center;
+        background-size:cover;
+        button{
+          left:11.5%;
+          top:46%;
+        }
+      }
     }
   }
 }
