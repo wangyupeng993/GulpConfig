@@ -22,29 +22,28 @@ window.onload = function (){
     Pace.on('done', function (){
         console.log('pace 加载完成！')
     })
-    Pace.on('hide', function (){
-        // canvasLoading()
-    })
+    Pace.on('hide', function (){})
     canvasLoading()
     bossKai()
-    SchoolLeaderKai()
     PlayVideoKai()
+    tailpage()
 }
 // 加载页
 function canvasLoading() {
     const myCanvas = document.querySelector('#myCanvas');
     const c = document.querySelector('#myCanvas canvas');
     const ctx = c.getContext('2d');
+    const borderWidth = $('#myCanvas').css('border-width')
+    const fontWidth = $('#myCanvas').css('font-size')
+    const lineWidth = borderWidth.substring(0,borderWidth.length - 2);
     const mW = c.width = $('#myCanvas').innerWidth() + 4;
     const mH = c.height = $('#myCanvas').innerHeight() + 4;
-    const lineWidth = 4;
     const r = mW / 2; //中间位置
     const cR = r - 0.5 * lineWidth; //圆半径
     const startAngle = -(1 / 2 * Math.PI); //开始角度
-
     const endAngle = startAngle + 2 * Math.PI; //结束角度
     const xAngle = 1 * (Math.PI / 180); //偏移角度量
-    const fontSize = 35; //字号大小
+    const fontSize = fontWidth.substring(0,fontWidth.length - 2); //字号大小
     let tmpAngle = startAngle; //临时角度变量
 
     const rander = function(){
@@ -69,6 +68,7 @@ function canvasLoading() {
         ctx.fillStyle = '#ffffff';
         ctx.font= fontSize + 'px Microsoft Yahei';
         ctx.textAlign='center';
+
         let loadtext = Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100)
         if (loadtext >= 99){
             loadtext = 99
@@ -95,8 +95,9 @@ function BootPageShow(){
 }
 // boss凯
 function bossKai(){
-    let backImg = null;// 获取背景图
-    var isIndex = null;
+    let backImg = ['./images/scene_four/44.jpg','./images/scene_five/55.jpg','./images/scene_six/66.jpg'];// 获取背景图
+    let templateImage = ['./images/scene_four/d2.jpg','./images/scene_five/e2.jpg','./images/scene_six/f2.jpg'];// 模板图片背景
+    let BossKai = ['./images/scene_four/d2.png','./images/scene_five/e2.png','./images/scene_six/f2.png']
     // boss凯滑屏
     const BossKaiSwiper = new Swiper('.boss-kai-container', {
         // direction : 'vertical',
@@ -112,27 +113,60 @@ function bossKai(){
         },
         on:{
             //初始化
-            init: function(){},
+            init: function(){
+                this.emit('transitionEnd')
+            },
             //上一页
             slideChangeTransitionStart: function(){},
             // 下一页结束
-            slideNextTransitionEnd:function (){
-                console.log(this.activeIndex + '下一页结束')
-            },
+            slideNextTransitionEnd:function (){},
             // 上一页结束
-            slidePrevTransitionEnd:function (){
-                console.log(this.activeIndex + '上一页结束')
-                // Choice($('.boss-kai-container').find('.scene-slide'),this.activeIndex)
-            },
-            slideNextTransitionEnd:function (){
-                console.log(this.activeIndex + '运动结束')
+            slidePrevTransitionEnd:function (){},
+            slideChangeTransitionEnd:function (){
+                const ImageTemplateBg = backImg[this.activeIndex]
+                const SyntheticImage = templateImage[this.activeIndex]
+                const kai = BossKai[this.activeIndex]
                 handleTouchstart($(".choice-button button"),function (){
-                    console.log($('.boss-kai-container .swiper-wrapper .swiper-slide'))
+                    $("#tailpage").css({
+                        'background':'url("'+ImageTemplateBg+'") no-repeat center center',
+                        'background-size':'cover'
+                    }).show()
+                    $('#canvas-image').css({
+                        'background':'url("'+ImageTemplateBg+'") no-repeat center center',
+                        'background-size':'cover'
+                    }).show(0,function (){
+                        setTimeout(function (){
+                            html2canvas(document.querySelector('#canvas-image'))
+                                .then(function(canvas) {
+                                    $('#tailpage .save-image').attr('src',canvas.toDataURL())
+                                    document.body.appendChild(canvas)
+                                })
+                        },1000)
+                    })
+                    $("#tailpage .template-image").css({
+                        'background':'url("'+SyntheticImage+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $("#canvas-image .template-image").css({
+                        'background':'url("'+SyntheticImage+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $("#tailpage .template-image > div").css({
+                        'background':'url("'+kai+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $("#canvas-image .template-image > div").css({
+                        'background':'url("'+kai+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $('#BossKai').hide()
+                    $('.choice-button').hide()
+                    $('.GetShare-button').show()
                 })
-            }
+            },
+            slideNextTransitionEnd:function (){}
         }
     });
-
     const BossKaiSlideOne = new Swiper('.boss-scene-slide1', {
         // direction : 'vertical',
         height: window.innerHeight,
@@ -251,8 +285,8 @@ function SchoolLeaderKai(){
         observer:true,
         observeParents:true,
         navigation: {
-            nextEl: '.schoo-glasses1-next',
-            prevEl: '.schoo-glasses1-prev',
+            nextEl: '.Schoo-glasses1-next',
+            prevEl: '.Schoo-glasses1-prev',
         },
         on:{
             //初始化
@@ -352,20 +386,21 @@ function PlayVideoKai(){
         SchoolKaiVideo.addEventListener('ended',function (){
             $('.video-list').hide()
             $("#SchoolKai-video").hide()
-            $("#SchoolLeaderKai").show()
+            $("#SchoolLeaderKai").show(0,function (){
+                SchoolLeaderKai()
+            })
             $('.choice-button').show()
         })
     })
 }
-// 选择好了
-function Choice(obj,index,imgUrl){
-    const isIndex = index
-    const backImage = obj.eq(isIndex).css('backgroundImage')
-    handleTouchstart($(".choice-button button"),function (){
-        console.log(isIndex)
-        if (isIndex !== index){
-            console.log(backImage)
-        }
+
+function tailpage(){
+
+    handleTouchstart($('.GetShare-button button').eq(1),function (){
+        $('#tailpage .share').show()
+    })
+    handleTouchstart($('#tailpage .share'),function (){
+        $('#tailpage .share').hide()
     })
 }
 //分享朋友

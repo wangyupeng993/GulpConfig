@@ -205,6 +205,28 @@ html,body{
       margin:0 auto;
     }
   }
+  .GetShare-button{
+    position:absolute;
+    bottom:80/@rem;
+    left:0;
+    width:100%;
+    height:80/@rem;
+    text-align:center;
+    display:none;
+    button{
+      width:300/@rem;
+      height:80/@rem;
+    }
+    button:nth-of-type(1){
+      background:url(../images/public/button-Get.png) no-repeat center center;
+      background-size:cover;
+      margin-right:40/@rem;
+    }
+    button:nth-of-type(2){
+      background:url(../images/public/button-show-off.png) no-repeat center center;
+      background-size:cover;
+    }
+  }
 }
 
 .loading{
@@ -215,12 +237,13 @@ html,body{
   div{
     width:206/@rem;
     height:206/@rem;
-    border:4/@rem solid rgba(255,255,255,0.3);
+    border:4/@rem solid rgba(255,255,255,0);
     border-radius:50%;
     margin:-206/@rem auto 0;
+    font-size:52/@rem;
     canvas{
-      margin-left:-1.7/@rem;
-      margin-top:-1.7/@rem;
+      background:url(../images/loading/circle.png) no-repeat center center;
+      background-size:cover;
     }
    }
 }
@@ -263,8 +286,8 @@ html,body{
       text-align:center;
       div{
         display:inline-block;
-        width:150/@rem;
-        height:100/@rem;
+        width:250/@rem;
+        height:150/@rem;
         margin:0 auto;
       }
     }
@@ -306,8 +329,12 @@ html,body{
       background:url(../images/scene_four/44.jpg) no-repeat center center;
       background-size:cover;
       .boss-photo-frame{
-        background:url(../images/scene_four/d1.jpg) no-repeat center center;
+        background:url(../images/scene_four/d2.jpg) no-repeat center center;
         background-size:cover;
+        div{
+          background:url(../images/scene_four/d2.png) no-repeat center center;
+          background-size:cover;
+        }
         button{
           right:12%;
           top:47%;
@@ -318,8 +345,12 @@ html,body{
       background:url(../images/scene_five/55.jpg) no-repeat center center;
       background-size:cover;
       .boss-photo-frame{
-        background:url(../images/scene_five/e1.jpg) no-repeat center center;
+        background:url(../images/scene_five/e2.jpg) no-repeat center center;
         background-size:cover;
+        div{
+          background:url(../images/scene_five/e2.png) no-repeat center center;
+          background-size:cover;
+        }
         button{
           left:12.5%;
           top:44%;
@@ -330,8 +361,12 @@ html,body{
       background:url(../images/scene_six/66.jpg) no-repeat center center;
       background-size:cover;
       .boss-photo-frame{
-        background:url(../images/scene_six/f1.jpg) no-repeat center center;
+        background:url(../images/scene_six/f2.jpg) no-repeat center center;
         background-size:cover;
+        div{
+          background:url(../images/scene_six/f2.png) no-repeat center center;
+          background-size:cover;
+        }
         button{
           right:11%;
           top:42%;
@@ -348,8 +383,12 @@ html,body{
       background:url(../images/scene_one/11.jpg) no-repeat center center;
       background-size:cover;
       .school-photo-frame{
-        background:url(../images/scene_one/a1.jpg) no-repeat center center;
+        background:url(../images/scene_one/a2.jpg) no-repeat center center;
         background-size:cover;
+        div{
+          background:url(../images/scene_one/a2.png) no-repeat center center;
+          background-size:cover;
+        }
         button{
           left:12%;
           top:40%;
@@ -360,8 +399,12 @@ html,body{
       background:url(../images/scene_two/22.jpg) no-repeat center center;
       background-size:cover;
       .school-photo-frame{
-        background:url(../images/scene_two/b1.jpg) no-repeat center center;
+        background:url(../images/scene_two/b2.jpg) no-repeat center center;
         background-size:cover;
+        div{
+          background:url(../images/scene_two/b2.png) no-repeat center center;
+          background-size:cover;
+        }
         button{
           right:9%;
           top:41%;
@@ -372,14 +415,62 @@ html,body{
       background:url(../images/scene_three/33.jpg) no-repeat center center;
       background-size:cover;
       .school-photo-frame{
-        background:url(../images/scene_three/c1.jpg) no-repeat center center;
+        background:url(../images/scene_three/c3.jpg) no-repeat center center;
         background-size:cover;
+        div{
+          background:url(../images/scene_three/c2.png) no-repeat center center;
+          background-size:cover;
+        }
         button{
           left:11.5%;
           top:46%;
         }
       }
     }
+  }
+}
+
+#tailpage,#canvas-image{
+  width:100vw;
+  height:100vh;
+  display:none;
+  background-size:cover;
+  .final-template{
+    position:relative;
+    top:27/@rem;
+    width:635/@rem;
+    height:961/@rem;
+    margin:0 auto;
+    background:url(../images/public/template-bg.png) no-repeat center center;
+    background-size:cover;
+    padding:25/@rem 25/@rem 0;
+    .template-image{
+      position:relative;
+      width:635/@rem;
+      height:787/@rem;
+      margin:0 auto;
+      background-size:cover;
+      div{}
+    }
+    .SaveTips{
+      position:absolute;
+      bottom:-37/@rem;
+      left:50%;
+      width:251/@rem;
+      height:37/@rem;
+      background:url(../images/public/SaveTips.png) no-repeat center center;
+      background-size:cover;
+      margin-left:-125/@rem;
+    }
+  }
+  .save-image{
+    opacity:0;
+  }
+  .share{
+    display:none;
+    background:url(../images/public/share.png) no-repeat;
+    background-size:cover;
+    z-index:333;
   }
 }
 

@@ -65,5 +65,5 @@ gulp.watch('app/*.html',['userefHtml'])
 });
 
 gulp.task('build',function (){
-RunSequence(['minImage','less','userefHtml','javascript','server']);
+ RunSequence(['minImage','less','userefHtml','javascript','server']);
 });

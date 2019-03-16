@@ -19,6 +19,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 </head>
 <body>
     <div id="container">
@@ -42,12 +43,12 @@
         </div>
         <div class="video-list position">
             <video id="BossKai-video" autobufer="true" playsinline=""
-                   preload="auto" src="./video/2_2.mp4"
+                   preload="auto" src="./video/5.mp4"
                    webkit-playsinline="true" x-webkit-airplay="allow"
                    x5-video-orientation="portrait" x5-video-player-fullscreen="true"
                    x5-video-player-type="h5"></video>
              <video id="SchoolKai-video" autobufer="true" playsinline=""
-            preload="auto" src="./video/2_2.mp4"
+            preload="auto" src="./video/6.mp4"
             webkit-playsinline="true" x-webkit-airplay="allow"
             x5-video-orientation="portrait" x5-video-player-fullscreen="true"
             x5-video-player-type="h5"></video>
@@ -58,6 +59,7 @@
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
                         <div class="phototemplate boss-photo-frame">
+                            <div class="position"></div>
                             <button>
                                 <input type="file" value="" name=""/>
                             </button>
@@ -95,6 +97,7 @@
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
                         <div class="phototemplate  boss-photo-frame">
+                            <div class="position"></div>
                             <button>
                                 <input type="file" value="" name=""/>
                             </button>
@@ -132,6 +135,7 @@
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
                         <div class="phototemplate  boss-photo-frame">
+                            <div class="position"></div>
                             <button>
                                 <input type="file" value="" name=""/>
                             </button>
@@ -176,6 +180,7 @@
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
                         <div class="phototemplate school-photo-frame">
+                            <div class="position"></div>
                             <button>
                                 <input type="file" value="" name=""/>
                             </button>
@@ -207,6 +212,7 @@
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
                         <div class="phototemplate school-photo-frame">
+                            <div class="position"></div>
                             <button>
                                 <input type="file" value="" name=""/>
                             </button>
@@ -238,6 +244,7 @@
                 <div class="swiper-slide scene-slide">
                     <section class="slide-container">
                         <div class="phototemplate school-photo-frame">
+                            <div class="position"></div>
                             <button>
                                 <input type="file" value="" name=""/>
                             </button>
@@ -270,8 +277,32 @@
             <div class="swiper-button-prev School-button-prev"></div><!--左箭头-->
             <div class="swiper-button-next School-button-next"></div><!--右箭头-->
         </div>
+        <!-- 生成图片html -->
+        <div id="canvas-image" class="position">
+            <section class="final-template">
+                <div class="template-image">
+                    <div class="position"></div>
+                </div>
+            </section>
+        </div>
+        <!-- 尾页 -->
+        <div id="tailpage" class="position">
+            <section class="final-template">
+                <div class="template-image">
+                    <div class="position"></div>
+                </div>
+                <div class="SaveTips"></div>
+            </section>
+            <img class="save-image position" src="" alt="" />
+            <div class="share position"></div>
+        </div>
         <!-- 选好了按钮 -->
         <div class="choice-button">
+            <button></button>
+        </div>
+        <!-- get同款、分享按钮 -->
+        <div class="GetShare-button">
+            <button></button>
             <button></button>
         </div>
     </div>
