@@ -80,11 +80,42 @@ html,body{
     transform: scale3d(1, 1, 1);
   }
 }
+@-webkit-keyframes MusicRotate {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+@keyframes MusicRotate{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
 
 .pulse{
   -webkit-animation: 1s pulse infinite linear;
   -o-animation: 1s pulse infinite linear;
   animation: 1s pulse infinite linear;
+}
+
+#music-on{
+  position:absolute;
+  right:58/@rem;
+  top:58/@rem;
+  width:54/@rem;
+  height:54/@rem;
+  background:url(../images/public/music.png) no-repeat center center;
+  background-size:cover;
+  z-index:444;
+}
+.music-rotate{
+  animation:1s MusicRotate infinite linear;
+  -webkit-animation:1s MusicRotate infinite linear;
 }
 
 //定义字体大小
@@ -152,6 +183,7 @@ html,body{
     height:787/@rem;
     overflow:hidden;
     button{
+      display:none;
       position:absolute;
       width:195/@rem;
       height:210/@rem;
@@ -182,6 +214,9 @@ html,body{
           width:100%;
           height:100%;
         }
+        .glasses-choice{
+          border:2px solid dodgerblue;
+        }
       }
     }
   }
@@ -196,7 +231,7 @@ html,body{
     height:78/@rem;
     text-align: center;
     display:none;
-    z-index:222;
+    z-index:3;
     button{
       width:298/@rem;
       height:78/@rem;
@@ -234,6 +269,7 @@ html,body{
   background-size:cover;
   display:flex;
   align-items: center;
+  z-index:555;
   div{
     width:206/@rem;
     height:206/@rem;
@@ -314,6 +350,7 @@ html,body{
 
 .video-list{
   display:none;
+  z-index:555;
   video{
     width:100vw;
     height:100vh;
@@ -325,15 +362,26 @@ html,body{
 #BossKai{
   display:none;
   .scene-wrapper{
+    .scene-slide{
+      .sun-glasses{
+        position:absolute;
+        width:196/@rem;
+        height:73/@rem;
+      }
+    }
     .scene-slide:nth-of-type(1){
       background:url(../images/scene_four/44.jpg) no-repeat center center;
       background-size:cover;
       .boss-photo-frame{
         background:url(../images/scene_four/d2.jpg) no-repeat center center;
         background-size:cover;
-        div{
+        div:nth-of-type(1){
           background:url(../images/scene_four/d2.png) no-repeat center center;
           background-size:cover;
+        }
+        .sun-glasses{
+          top:51.5%;
+          right:12%;
         }
         button{
           right:12%;
@@ -347,9 +395,13 @@ html,body{
       .boss-photo-frame{
         background:url(../images/scene_five/e2.jpg) no-repeat center center;
         background-size:cover;
-        div{
+        div:nth-of-type(1){
           background:url(../images/scene_five/e2.png) no-repeat center center;
           background-size:cover;
+        }
+        .sun-glasses{
+          top:48.5%;
+          left:12%;
         }
         button{
           left:12.5%;
@@ -363,9 +415,13 @@ html,body{
       .boss-photo-frame{
         background:url(../images/scene_six/f2.jpg) no-repeat center center;
         background-size:cover;
-        div{
+        div:nth-of-type(1){
           background:url(../images/scene_six/f2.png) no-repeat center center;
           background-size:cover;
+        }
+        .sun-glasses{
+          top:45%;
+          right:11%;
         }
         button{
           right:11%;
@@ -375,19 +431,36 @@ html,body{
     }
   }
 }
+.bosskai-tips{
+  display:none;
+  background:url(../images/public/bosskai-tips.png) no-repeat center center;
+  background-size:cover;
+  z-index: 4;
+}
 
 #SchoolLeaderKai{
   display:none;
   .scene-wrapper{
+    .scene-slide{
+      .optics-glasses{
+        position:absolute;
+        width:189/@rem;
+        height:62/@rem;
+      }
+    }
     .scene-slide:nth-of-type(1){
       background:url(../images/scene_one/11.jpg) no-repeat center center;
       background-size:cover;
       .school-photo-frame{
         background:url(../images/scene_one/a2.jpg) no-repeat center center;
         background-size:cover;
-        div{
+        div:nth-of-type(1){
           background:url(../images/scene_one/a2.png) no-repeat center center;
           background-size:cover;
+        }
+        .optics-glasses{
+          top:46%;
+          left:13%;
         }
         button{
           left:12%;
@@ -401,9 +474,13 @@ html,body{
       .school-photo-frame{
         background:url(../images/scene_two/b2.jpg) no-repeat center center;
         background-size:cover;
-        div{
+        div:nth-of-type(1){
           background:url(../images/scene_two/b2.png) no-repeat center center;
           background-size:cover;
+        }
+        .optics-glasses{
+          top:46.5%;
+          right:9.2%;
         }
         button{
           right:9%;
@@ -417,9 +494,13 @@ html,body{
       .school-photo-frame{
         background:url(../images/scene_three/c3.jpg) no-repeat center center;
         background-size:cover;
-        div{
+        div:nth-of-type(1){
           background:url(../images/scene_three/c2.png) no-repeat center center;
           background-size:cover;
+        }
+        .optics-glasses{
+          top:50.5%;
+          left:12%;
         }
         button{
           left:11.5%;
@@ -428,6 +509,12 @@ html,body{
       }
     }
   }
+}
+.Schoolkai-tips{
+  display:none;
+  background:url(../images/public/Schoolkai-tips.png) no-repeat center center;
+  background-size:cover;
+  z-index: 4;
 }
 
 #tailpage,#canvas-image{
@@ -450,7 +537,40 @@ html,body{
       height:787/@rem;
       margin:0 auto;
       background-size:cover;
-      div{}
+      .sun-glasses{
+        position:absolute;
+        width:196/@rem;
+        height:73/@rem;
+      }
+      .sun-glasses0{
+        top:51.5%;
+        right:12%;
+      }
+      .sun-glasses1{
+        top:48.5%;
+        left:12%;
+      }
+      .sun-glasses2{
+        top:45%;
+        right:11%;
+      }
+      .optics-glasses{
+        position:absolute;
+        width:189/@rem;
+        height:62/@rem;
+      }
+      .optics-glasses0{
+        top:46%;
+        left:13%;
+      }
+      .optics-glasses1{
+        top:46.5%;
+        right:9.2%;
+      }
+      .optics-glasses2{
+        top:50.5%;
+        left:12%;
+      }
     }
     .SaveTips{
       position:absolute;

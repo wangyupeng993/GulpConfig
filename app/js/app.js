@@ -9,7 +9,6 @@ window.onload = function (){
             selectors: ['.my-page']
         }
     }
-
     Pace.on('start', function (){
         console.log('pace 开始加载！')
     })
@@ -24,7 +23,7 @@ window.onload = function (){
     })
     Pace.on('hide', function (){})
     canvasLoading()
-    bossKai()
+    getGlasses()
     PlayVideoKai()
     tailpage()
 }
@@ -151,11 +150,11 @@ function bossKai(){
                         'background':'url("'+SyntheticImage+'") no-repeat center center',
                         'background-size':'cover'
                     })
-                    $("#tailpage .template-image > div").css({
+                    $("#tailpage .template-image > div").eq(0).css({
                         'background':'url("'+kai+'") no-repeat center center',
                         'background-size':'cover'
                     })
-                    $("#canvas-image .template-image > div").css({
+                    $("#canvas-image .template-image > div").eq(0).css({
                         'background':'url("'+kai+'") no-repeat center center',
                         'background-size':'cover'
                     })
@@ -248,6 +247,9 @@ function bossKai(){
 }
 // 学生凯
 function SchoolLeaderKai(){
+    let backImg = ['./images/scene_one/11.jpg','./images/scene_two/22.jpg','./images/scene_three/33.jpg'];// 获取背景图
+    let templateImage = ['./images/scene_one/a2.jpg','./images/scene_two/b2.jpg','./images/scene_three/c3.jpg'];// 模板图片背景
+    let BossKai = ['./images/scene_one/a2.png','./images/scene_two/b2.png','./images/scene_three/c2.png']
     // 学长凯滑屏
     const SchoolKaiSwiper = new Swiper('.school-kai-container', {
         // direction : 'vertical',
@@ -272,7 +274,66 @@ function SchoolLeaderKai(){
             // 下一页结束
             slideNextTransitionEnd:function (){},
             // 上一页结束
-            slidePrevTransitionEnd:function (){}
+            slidePrevTransitionEnd:function (){},
+            slideChangeTransitionEnd:function (){
+                const isIndex = this.activeIndex
+                const ImageTemplateBg = backImg[this.activeIndex]
+                const SyntheticImage = templateImage[this.activeIndex]
+                const kai = BossKai[this.activeIndex]
+                handleTouchstart($(".choice-button button"),function (){
+                    const GetUrl = $('#SchoolLeaderKai .swiper-wrapper .glasses-choice').attr('src')
+                    const Suffixname = GetUrl.substring(0,GetUrl.length - 4)
+                    const AddClass = 'optics-glasses optics-glasses'+isIndex
+                    console.log(isIndex,AddClass.toString())
+                    $("#tailpage").css({
+                        'background':'url("'+ImageTemplateBg+'") no-repeat center center',
+                        'background-size':'cover'
+                    }).show()
+
+                    $('#canvas-image .sun-optics-glasses').addClass(AddClass)
+                        .css({
+                        'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+                        'background-size':'100% 100%'
+                    })
+                    $('#tailpage .sun-optics-glasses').addClass(AddClass)
+                        .css({
+                            'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+                            'background-size':'100% 100%'
+                        })
+
+                    $('#canvas-image').css({
+                        'background':'url("'+ImageTemplateBg+'") no-repeat center center',
+                        'background-size':'cover'
+                    }).show(0,function (){
+                        setTimeout(function (){
+                            html2canvas(document.querySelector('#canvas-image'))
+                                .then(function(canvas) {
+                                    $('#tailpage .save-image').attr('src',canvas.toDataURL())
+                                    document.body.appendChild(canvas)
+                                })
+                        },1000)
+                    })
+                    $("#tailpage .template-image").css({
+                        'background':'url("'+SyntheticImage+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $("#canvas-image .template-image").css({
+                        'background':'url("'+SyntheticImage+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $("#tailpage .template-image > div").eq(0).css({
+                        'background':'url("'+kai+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $("#canvas-image .template-image > div").eq(0).css({
+                        'background':'url("'+kai+'") no-repeat center center',
+                        'background-size':'cover'
+                    })
+                    $('#SchoolLeaderKai').hide()
+                    $('.choice-button').hide()
+                    $('.GetShare-button').show()
+                })
+            }
         }
     });
 
@@ -359,21 +420,44 @@ function SchoolLeaderKai(){
 }
 // 播放视频
 function PlayVideoKai(){
+    var Audio = document.querySelector('#audio')
+    let MusicOn = true
     let [u,app] = [navigator.userAgent,navigator.appVersion]
     const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
     const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    $('#music-on').on('touchstart',function (){
+        if (MusicOn){
+            Audio.play()
+            $('#music-on').addClass('music-rotate')
+        }else{
+            Audio.pause()
+            $('#music-on').removeClass('music-rotate')
+        }
+        MusicOn = !MusicOn
+    })
+
     handleTouchstart($('#guide .bosss-button > div'),function (){
         const BossKiaVideo = document.querySelector('#BossKai-video')
         $('#guide').hide()
         $('.video-list').show()
         $("#BossKai-video").show()
         BossKiaVideo.play()
+        Audio.pause()
+        MusicOn = true
+        $('#music-on').removeClass('music-rotate')
 
         BossKiaVideo.addEventListener('ended',function (){
+            bossKai()
             $('.video-list').hide()
             $("#BossKai-video").hide()
             $("#BossKai").show()
             $('.choice-button').show()
+            $(".bosskai-tips").show()
+            setTimeout(function (){
+                $(".bosskai-tips").hide()
+            },2000)
+
         })
     })
     handleTouchstart($('#guide .School-button > div'),function (){
@@ -382,23 +466,51 @@ function PlayVideoKai(){
         $('.video-list').show()
         $("#SchoolKai-video").show()
         SchoolKaiVideo.play()
+        Audio.pause()
+        MusicOn = true
+        $('#music-on').removeClass('music-rotate')
 
         SchoolKaiVideo.addEventListener('ended',function (){
+            SchoolLeaderKai()
             $('.video-list').hide()
             $("#SchoolKai-video").hide()
-            $("#SchoolLeaderKai").show(0,function (){
-                SchoolLeaderKai()
-            })
+            $("#SchoolLeaderKai").show(0,function (){})
             $('.choice-button').show()
+            $(".Schoolkai-tips").show()
+            setTimeout(function (){
+                $(".Schoolkai-tips").hide()
+            },2000)
         })
     })
 }
-
+// 获取用户点击的眼镜
+function getGlasses(){
+    handleTouchstart($('.Glasses-url'),function (self){
+        const GetUrl = $(self).attr('src')
+        const Suffixname = GetUrl.substring(0,GetUrl.length - 4)
+        $('.Glasses-url').removeClass('glasses-choice')
+        $(self).addClass('glasses-choice')
+        $('#BossKai .boss-photo-frame .sun-glasses').css({
+            'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+            'background-size':'cover'
+        })
+        $('#SchoolLeaderKai .school-photo-frame .optics-glasses').css({
+            'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+            'background-size':'100% 100%'
+        })
+    })
+}
+// 尾页
 function tailpage(){
 
     handleTouchstart($('.GetShare-button button').eq(1),function (){
         $('#tailpage .share').show()
     })
+
+    handleTouchstart($('.GetShare-button button').eq(0),function (){
+        window.location.reload()
+    })
+
     handleTouchstart($('#tailpage .share'),function (){
         $('#tailpage .share').hide()
     })
@@ -494,7 +606,7 @@ function handleTouchstart(obj,callback) {
     obj.on("touchend",function (e){
         endY = e.changedTouches[0].pageY;
         if (startY == endY){
-            callback&&callback();
+            callback&&callback($(this));
         }
 
     });
