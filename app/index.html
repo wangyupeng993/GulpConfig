@@ -25,6 +25,13 @@
     <div id="container">
         <audio id="audio" src="./music/bg.mp3" preload></audio>
         <div id="music-on"></div>
+        <!-- 操作提示弹窗 -->
+        <div class="operation-tips position">
+            <p>您还没有选择照片哦~</p>
+        </div>
+        <div class="upload-loading position">
+            <img src="./images/loading/loading.gif" alt="" />
+        </div>
         <div class="loading position">
             <div id="myCanvas">
                 <canvas>当前浏览器不支持canvas组件请升级！</canvas>
@@ -63,7 +70,7 @@
                             <div class="position"></div>
                             <div class="sun-glasses"></div>
                             <button>
-                                <input type="file" value="" name=""/>
+                                <input type="file" isIndex="0" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
                             </button>
                         </div>
                         <div class="boss-scene-slide1 glasses">
@@ -102,7 +109,7 @@
                             <div class="position"></div>
                             <div class="sun-glasses"></div>
                             <button>
-                                <input type="file" value="" name=""/>
+                                <input type="file" isIndex="1" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
                             </button>
                         </div>
                         <div class="boss-scene-slide2 glasses">
@@ -141,7 +148,7 @@
                             <div class="position"></div>
                             <div class="sun-glasses"></div>
                             <button>
-                                <input type="file" value="" name=""/>
+                                <input type="file" isIndex="2" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
                             </button>
                         </div>
                         <div class="boss-scene-slide3 glasses">
@@ -188,25 +195,25 @@
                             <div class="position"></div>
                             <div class="optics-glasses"></div>
                             <button>
-                                <input type="file" value="" name=""/>
+                                <input type="file" isIndex="0" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
                             </button>
                         </div>
                         <div class="school-scene-slide1 glasses">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ3056.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ3056.png" alt="">
                                     </div>
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ7039.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7039.png" alt="">
                                     </div>
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ7098.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7098.png" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ6036.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ6036.png" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -221,25 +228,25 @@
                             <div class="position"></div>
                             <div class="optics-glasses"></div>
                             <button>
-                                <input type="file" value="" name=""/>
+                                <input type="file" isIndex="1" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
                             </button>
                         </div>
                         <div class="school-scene-slide2 glasses">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ3056.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ3056.png" alt="">
                                     </div>
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ7039.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7039.png" alt="">
                                     </div>
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ7098.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7098.png" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ6036.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ6036.png" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -254,25 +261,25 @@
                             <div class="position"></div>
                             <div class="optics-glasses"></div>
                             <button>
-                                <input type="file" value="" name=""/>
+                                <input type="file" isIndex="2" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
                             </button>
                         </div>
                         <div class="school-scene-slide3 glasses">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ3056.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ3056.png" alt="">
                                     </div>
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ7039.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7039.png" alt="">
                                     </div>
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ7098.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7098.png" alt="">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/SchooGlasses/BJ6036.png" alt="">
+                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ6036.png" alt="">
                                     </div>
                                 </div>
                             </div>

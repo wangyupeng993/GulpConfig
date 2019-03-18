@@ -149,6 +149,35 @@ html,body{
   background-size:cover;
 }
 
+.operation-tips{
+  display:none;
+  align-items: center;
+  p{
+    width:460/@rem;
+    line-height:40/@rem;
+    font-size:32/@rem;
+    background-color:rgba(0,0,0,0.5);
+    border-radius:8/@rem;
+    padding:20/@rem;
+    color:#fff;
+    text-align:center;
+    margin:0 auto;
+  }
+}
+.upload-loading{
+  display:none;
+  align-items: center;
+  z-index:666;
+  background-color:rgba(0,0,0,0.5);
+  img{
+    display:block;
+    width:120/@rem;
+    height:120/@rem;
+    margin:0 auto;
+    border-radius:50%;
+  }
+}
+
 .swiper{
   width:100vw;
   height:100vh;
@@ -183,7 +212,6 @@ html,body{
     height:787/@rem;
     overflow:hidden;
     button{
-      display:none;
       position:absolute;
       width:195/@rem;
       height:210/@rem;
@@ -221,7 +249,7 @@ html,body{
     }
   }
 }
-//chioce-button
+
 #container{
   .choice-button{
     position:absolute;
@@ -512,7 +540,7 @@ html,body{
 }
 .Schoolkai-tips{
   display:none;
-  background:url(../images/public/Schoolkai-tips.png) no-repeat center center;
+  background:url(../images/public/SchoolKai-tips.png) no-repeat center center;
   background-size:cover;
   z-index: 4;
 }

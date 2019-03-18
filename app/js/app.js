@@ -27,6 +27,7 @@ window.onload = function (){
     PlayVideoKai()
     tailpage()
 }
+let Files = null
 // 加载页
 function canvasLoading() {
     const myCanvas = document.querySelector('#myCanvas');
@@ -71,13 +72,54 @@ function canvasLoading() {
         let loadtext = Math.round((tmpAngle -  startAngle) / (endAngle - startAngle) * 100)
         if (loadtext >= 99){
             loadtext = 99
-            BootPageShow();
+            ImageLoading()
+            // BootPageShow();
         }
         ctx.fillText( loadtext + '%', r, r + fontSize / 2);
 
         requestAnimationFrame(rander);
     }
     rander()
+}
+// 图片加载进度
+function ImageLoading(){
+    let [num,iNew] = [0,0]
+    const ImageArr = [
+        './images/scene_one/11.jpg','./images/scene_one/a1.jpg','./images/scene_one/a2.jpg',
+        './images/scene_one/a2.png','./images/scene_two/22.jpg','./images/scene_two/b1.jpg',
+        './images/scene_two/b2.png','./images/scene_two/b2.jpg','./images/scene_three/33.jpg',
+        './images/scene_three/c2.png','./images/scene_three/c1.jpg','./images/scene_three/c3.jpg',
+        './images/scene_four/d2.png','./images/scene_four/44.jpg','./images/scene_four/d2.jpg',
+        './images/scene_four/d1.jpg','./images/scene_five/55.jpg','./images/scene_five/e2.jpg',
+        './images/scene_five/e1.jpg','./images/scene_five/e2.png','./images/scene_six/66.jpg',
+        './images/scene_six/f1.jpg','./images/scene_six/f2.png','./images/scene_six/f2.jpg',
+        './images/SchoolGlasses/BJ3056.png','./images/SchoolGlasses/BJ3056-2.png','./images/SchoolGlasses/BJ6036.png',
+        './images/SchoolGlasses/BJ6036-2.png','./images/SchoolGlasses/BJ7039-2.png','./images/SchoolGlasses/BJ7039.png',
+        './images/SchoolGlasses/BJ7098-2.png','./images/SchoolGlasses/BJ7098-2.png','./images/BossGlasses/BL3019.png',
+        './images/BossGlasses/BL3019-2.png','./images/BossGlasses/BL7039.png','./images/BossGlasses/BL7039-2.png',
+        './images/BossGlasses/BL7052-2.png','./images/BossGlasses/BL7052-2.png','./images/BossGlasses/BL7055-2.png',
+        './images/BossGlasses/BL7055.png','./images/BossGlasses/BL7076-2.png','./images/BossGlasses/BL7076.png',
+        './images/BossGlasses/BL8068.png','./images/BossGlasses/BL8068-2.png','./images/BootPage/bg.jpg',
+        './images/BootPage/boss-button.png','./images/BootPage/boss-kai.png','./images/BootPage/icon1.png',
+        './images/BootPage/School-button.png','./images/BootPage/Schoolleader.png','./images/loading/circle.png',
+        './images/loading/loading_bg.jpg','./images/public/arrow-left.png','./images/public/arrow-left2.png',
+        './images/public/arrow-right.png','./images/public/arrow-right2.png','./images/public/bosskai-tips.png',
+        './images/public/button-choice.png','./images/public/button-Get.png','./images/public/button-show-off.png',
+        './images/public/button-upload.png','./images/public/music.png','./images/public/SaveTips.png',
+        './images/public/SchoolKai-tips.png','./images/public/share.png','./images/public/template-bg.png',
+    ]
+
+    for (var i = 0;i<ImageArr.length;i++){
+        let ImageSrc = new Image()
+        ImageSrc.src = ImageArr[i]
+        ImageSrc.onload = function (){
+            iNew++
+            num = (iNew / ImageArr.length).toFixed(0)*100
+            if (num >= 100){
+                BootPageShow()
+            }
+        }
+    }
 }
 // 引导页显示
 function BootPageShow(){
@@ -95,7 +137,7 @@ function BootPageShow(){
 // boss凯
 function bossKai(){
     let backImg = ['./images/scene_four/44.jpg','./images/scene_five/55.jpg','./images/scene_six/66.jpg'];// 获取背景图
-    let templateImage = ['./images/scene_four/d2.jpg','./images/scene_five/e2.jpg','./images/scene_six/f2.jpg'];// 模板图片背景
+    let templateImage = ['qc_101099_175005_10','qc_101099_175010_11','qc_101099_175016_12'];// 模板图片背景
     let BossKai = ['./images/scene_four/d2.png','./images/scene_five/e2.png','./images/scene_six/f2.png']
     // boss凯滑屏
     const BossKaiSwiper = new Swiper('.boss-kai-container', {
@@ -121,11 +163,64 @@ function bossKai(){
             slideNextTransitionEnd:function (){},
             // 上一页结束
             slidePrevTransitionEnd:function (){},
+            // 开始切换
+            slideChangeTransitionStart:function (){
+                Files = null
+                $('#BossKai .scene-wrapper .boss-photo-frame').find('button').show()
+                $('#BossKai .swiper-wrapper .glasses-choice').attr('src','')
+            },
+            // 切换结束
             slideChangeTransitionEnd:function (){
+                const isIndex = this.activeIndex
                 const ImageTemplateBg = backImg[this.activeIndex]
                 const SyntheticImage = templateImage[this.activeIndex]
                 const kai = BossKai[this.activeIndex]
+                const AddClass = 'sun-glasses sun-glasses'+this.activeIndex
+                if (this.activeIndex === 0){
+                    $('#canvas-image .sun-optics-glasses').removeClass('sun-glasses sun-glasses1')
+                    $('#tailpage .sun-optics-glasses').removeClass('sun-glasses sun-glasses1')
+                    $('#canvas-image .sun-optics-glasses').removeClass('sun-glasses sun-glassess2')
+                    $('#tailpage .sun-optics-glasses').removeClass('sun-glasses sun-glasses2')
+
+                    $('#canvas-image .sun-optics-glasses').addClass('sun-glasses sun-glasses0')
+                    $('#tailpage .sun-optics-glasses').addClass('sun-glasses sun-glasses0')
+                }
+                if (this.activeIndex === 1){
+                    $('#canvas-image .sun-optics-glasses').removeClass('sun-glasses sun-glasses2')
+                    $('#tailpage .sun-optics-glasses').removeClass('sun-glasses sun-glasses2')
+                    $('#canvas-image .sun-optics-glasses').removeClass('sun-glasses sun-glasses0')
+                    $('#tailpage .sun-optics-glasses').removeClass('sun-glasses sun-glasses0')
+
+                    $('#canvas-image .sun-optics-glasses').addClass('sun-glasses sun-glasses1')
+                    $('#tailpage .sun-optics-glasses').addClass('sun-glasses sun-glasses1')
+                }
+                if (this.activeIndex === 2){
+                    $('#canvas-image .sun-optics-glasses').removeClass('sun-glasses sun-glasses0')
+                    $('#tailpage .sun-optics-glasses').removeClass('sun-glasses sun-glasses0')
+                    $('#canvas-image .sun-optics-glasses').removeClass('sun-glasses sun-glasses1')
+                    $('#tailpage .sun-optics-glasses').removeClass('sun-glasses sun-glasses1')
+
+                    $('#canvas-image .sun-optics-glasses').addClass('sun-glasses sun-glasses2')
+                    $('#tailpage .sun-optics-glasses').addClass('sun-glasses sun-glasses2')
+                }
+
                 handleTouchstart($(".choice-button button"),function (){
+                    const GetUrl = $('#BossKai .swiper-wrapper .glasses-choice').attr('src')
+                    const Suffixname = GetUrl?GetUrl.substring(0,GetUrl.length - 4):''
+                    if (!GetUrl){
+                        dialog('您还没有选择眼镜哦~')
+                        return false
+                    }
+
+                    $('#canvas-image .sun-optics-glasses').css({
+                        'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+                        'background-size':'100% 100%'
+                    })
+                    $('#tailpage .sun-optics-glasses').css({
+                        'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+                        'background-size':'100% 100%'
+                    })
+
                     $("#tailpage").css({
                         'background':'url("'+ImageTemplateBg+'") no-repeat center center',
                         'background-size':'cover'
@@ -134,22 +229,17 @@ function bossKai(){
                         'background':'url("'+ImageTemplateBg+'") no-repeat center center',
                         'background-size':'cover'
                     }).show(0,function (){
+                        uploadloadingShow()
                         setTimeout(function (){
                             html2canvas(document.querySelector('#canvas-image'))
                                 .then(function(canvas) {
                                     $('#tailpage .save-image').attr('src',canvas.toDataURL())
                                     document.body.appendChild(canvas)
+                                    uploadloadingHide()
                                 })
                         },1000)
                     })
-                    $("#tailpage .template-image").css({
-                        'background':'url("'+SyntheticImage+'") no-repeat center center',
-                        'background-size':'cover'
-                    })
-                    $("#canvas-image .template-image").css({
-                        'background':'url("'+SyntheticImage+'") no-repeat center center',
-                        'background-size':'cover'
-                    })
+
                     $("#tailpage .template-image > div").eq(0).css({
                         'background':'url("'+kai+'") no-repeat center center',
                         'background-size':'cover'
@@ -244,11 +334,17 @@ function bossKai(){
             slidePrevTransitionEnd:function (){}
         }
     });
+
+    uploadFile(function (isIndex,base64Url){
+        requestAjax(isIndex,base64Url,templateImage[isIndex], function(isIndex,imageUrl){
+            AjaxResult("#BossKai .scene-wrapper .boss-photo-frame",isIndex,imageUrl)
+        })
+    })
 }
 // 学生凯
 function SchoolLeaderKai(){
     let backImg = ['./images/scene_one/11.jpg','./images/scene_two/22.jpg','./images/scene_three/33.jpg'];// 获取背景图
-    let templateImage = ['./images/scene_one/a2.jpg','./images/scene_two/b2.jpg','./images/scene_three/c3.jpg'];// 模板图片背景
+    let templateImage = ['qc_101099_174951_7','qc_101099_174956_8','qc_101099_175000_9'];// 模板图片背景
     let BossKai = ['./images/scene_one/a2.png','./images/scene_two/b2.png','./images/scene_three/c2.png']
     // 学长凯滑屏
     const SchoolKaiSwiper = new Swiper('.school-kai-container', {
@@ -266,8 +362,7 @@ function SchoolLeaderKai(){
         on:{
             //初始化
             init: function(){
-                // shareFriend()
-                // this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
+                this.emit('transitionEnd');//在初始化时触发一次transitionEnd事件
             },
             //上一页
             slideChangeTransitionStart: function(){},
@@ -275,27 +370,63 @@ function SchoolLeaderKai(){
             slideNextTransitionEnd:function (){},
             // 上一页结束
             slidePrevTransitionEnd:function (){},
+            // 开始切换
+            slideChangeTransitionStart:function (){
+                Files = null
+                $('#SchoolLeaderKai .scene-wrapper .school-photo-frame').find('button').show()
+                $('#SchoolLeaderKai .swiper-wrapper .glasses-choice').attr('src','')
+            },
+            // 切换结束
             slideChangeTransitionEnd:function (){
-                const isIndex = this.activeIndex
                 const ImageTemplateBg = backImg[this.activeIndex]
                 const SyntheticImage = templateImage[this.activeIndex]
+                const AddClass = 'optics-glasses optics-glasses'+this.activeIndex
                 const kai = BossKai[this.activeIndex]
+                if (this.activeIndex === 0){
+                    $('#canvas-image .sun-optics-glasses').removeClass('optics-glasses optics-glasses1')
+                    $('#tailpage .sun-optics-glasses').removeClass('optics-glasses optics-glasses1')
+                    $('#canvas-image .sun-optics-glasses').removeClass('optics-glasses optics-glasses2')
+                    $('#tailpage .sun-optics-glasses').removeClass('optics-glasses optics-glasses2')
+
+                    $('#canvas-image .sun-optics-glasses').addClass('optics-glasses optics-glasses0')
+                    $('#tailpage .sun-optics-glasses').addClass('optics-glasses optics-glasses0')
+                }
+                if (this.activeIndex === 1){
+                    $('#canvas-image .sun-optics-glasses').removeClass('optics-glasses optics-glasses2')
+                    $('#tailpage .sun-optics-glasses').removeClass('optics-glasses optics-glasses2')
+                    $('#canvas-image .sun-optics-glasses').removeClass('optics-glasses optics-glasses0')
+                    $('#tailpage .sun-optics-glasses').removeClass('optics-glasses optics-glasses0')
+
+                    $('#canvas-image .sun-optics-glasses').addClass('optics-glasses optics-glasses1')
+                    $('#tailpage .sun-optics-glasses').addClass('optics-glasses optics-glasses1')
+                }
+                if (this.activeIndex === 2){
+                    $('#canvas-image .sun-optics-glasses').removeClass('optics-glasses optics-glasses0')
+                    $('#tailpage .sun-optics-glasses').removeClass('optics-glasses optics-glasses0')
+                    $('#canvas-image .sun-optics-glasses').removeClass('optics-glasses optics-glasses1')
+                    $('#tailpage .sun-optics-glasses').removeClass('optics-glasses optics-glasses1')
+
+                    $('#canvas-image .sun-optics-glasses').addClass('optics-glasses optics-glasses2')
+                    $('#tailpage .sun-optics-glasses').addClass('optics-glasses optics-glasses2')
+                }
                 handleTouchstart($(".choice-button button"),function (){
                     const GetUrl = $('#SchoolLeaderKai .swiper-wrapper .glasses-choice').attr('src')
-                    const Suffixname = GetUrl.substring(0,GetUrl.length - 4)
-                    const AddClass = 'optics-glasses optics-glasses'+isIndex
-                    console.log(isIndex,AddClass.toString())
+                    const Suffixname = GetUrl?GetUrl.substring(0,GetUrl.length - 4):''
+                    if (!GetUrl){
+                        dialog('您还没有选择眼镜哦~')
+                        return false
+                    }
                     $("#tailpage").css({
                         'background':'url("'+ImageTemplateBg+'") no-repeat center center',
                         'background-size':'cover'
                     }).show()
 
-                    $('#canvas-image .sun-optics-glasses').addClass(AddClass)
+                    $('#canvas-image .sun-optics-glasses')
                         .css({
-                        'background':'url("'+Suffixname+'-2.png") no-repeat center center',
-                        'background-size':'100% 100%'
-                    })
-                    $('#tailpage .sun-optics-glasses').addClass(AddClass)
+                            'background':'url("'+Suffixname+'-2.png") no-repeat center center',
+                            'background-size':'100% 100%'
+                        })
+                    $('#tailpage .sun-optics-glasses')
                         .css({
                             'background':'url("'+Suffixname+'-2.png") no-repeat center center',
                             'background-size':'100% 100%'
@@ -305,22 +436,17 @@ function SchoolLeaderKai(){
                         'background':'url("'+ImageTemplateBg+'") no-repeat center center',
                         'background-size':'cover'
                     }).show(0,function (){
+                        uploadloadingShow()
                         setTimeout(function (){
                             html2canvas(document.querySelector('#canvas-image'))
                                 .then(function(canvas) {
                                     $('#tailpage .save-image').attr('src',canvas.toDataURL())
                                     document.body.appendChild(canvas)
+                                    uploadloadingHide()
                                 })
                         },1000)
                     })
-                    $("#tailpage .template-image").css({
-                        'background':'url("'+SyntheticImage+'") no-repeat center center',
-                        'background-size':'cover'
-                    })
-                    $("#canvas-image .template-image").css({
-                        'background':'url("'+SyntheticImage+'") no-repeat center center',
-                        'background-size':'cover'
-                    })
+
                     $("#tailpage .template-image > div").eq(0).css({
                         'background':'url("'+kai+'") no-repeat center center',
                         'background-size':'cover'
@@ -417,6 +543,12 @@ function SchoolLeaderKai(){
             slidePrevTransitionEnd:function (){}
         }
     });
+
+    uploadFile(function (isIndex,base64Url){
+        requestAjax(isIndex,base64Url,templateImage[isIndex], function(isIndex,imageUrl){
+            AjaxResult("#SchoolLeaderKai .scene-wrapper .school-photo-frame",isIndex,imageUrl)
+        })
+    })
 }
 // 播放视频
 function PlayVideoKai(){
@@ -486,6 +618,10 @@ function PlayVideoKai(){
 // 获取用户点击的眼镜
 function getGlasses(){
     handleTouchstart($('.Glasses-url'),function (self){
+        if (Files === null){
+            dialog('您还没有选择照片哦~')
+            return false
+        }
         const GetUrl = $(self).attr('src')
         const Suffixname = GetUrl.substring(0,GetUrl.length - 4)
         $('.Glasses-url').removeClass('glasses-choice')
@@ -611,3 +747,85 @@ function handleTouchstart(obj,callback) {
 
     });
 };
+// 提示弹窗
+function dialog(text){
+    $('.operation-tips').css({'z-index':'666','display':'flex'})
+    $('.operation-tips p').text(text)
+    setTimeout(function (){
+        $('.operation-tips').css({'z-index':'0','display':'none'})
+        $('.operation-tips p').text('')
+    },1000)
+}
+// 上传loading显示
+function uploadloadingShow(){
+    $('.upload-loading').css({'z-index':'666','display':'flex'})
+}
+// 上传loading隐藏
+function uploadloadingHide(){
+    $('.upload-loading').css({'z-index':'0','display':'none'})
+}
+// 获取文件
+function uploadFile(callback){
+    $('.slide-container .phototemplate button').find('input').on('change',function (){
+        const isIndex = Number(this.getAttribute("isINdex"))
+        const reader = new FileReader();
+        Files = this.files[0]
+        let base64Url = null
+        reader.readAsDataURL(Files)
+        uploadloadingShow()
+        reader.onload = function (e){
+            base64Url = reader.result
+            callback&&callback(isIndex,base64Url)
+        }
+    })
+}
+// ajax请求
+function requestAjax(isIndex,image,template,callback){
+    console.log(isIndex,image,template)
+    $.ajax({
+        type: "POST",
+        url:'https://farm.xmluma.cn/EPF_Up_Img/index.php?c=upload',
+        data:{base_64:image,template:template},
+        dataType: "json",
+        success:function (respone){
+            uploadloadingHide()
+            const imgUrl = respone.data.img_url?respone.data.img_url:''
+            if (!respone.data.img_url||respone.data.img_url === null||imgUrl === ''){
+                dialog('您上传的图片不正确，请上传单人的正脸照！')
+                return false
+            }
+            callback&&callback(isIndex,imgUrl)
+        },
+        error:function (error){
+            console.log(error)
+            callback&&callback(isIndex,imgUrl)
+        }
+    })
+}
+// 结果
+function AjaxResult(obj,isIndex,imageUrl){
+    $(obj).find('button').hide()
+    if (obj === '#BossKai .scene-wrapper .boss-photo-frame'){
+        $('#BossKai .scene-wrapper .scene-slide').eq(isIndex).find('.boss-photo-frame').css({
+            'background':'url("'+imageUrl+'") no-repeat center center',
+            'background-size':'cover'
+        })
+    }
+
+    if (obj === '#SchoolLeaderKai .scene-wrapper .school-photo-frame'){
+        $('#SchoolLeaderKai .scene-wrapper .scene-slide').eq(isIndex).find('.school-photo-frame').css({
+            'background':'url("'+imageUrl+'") no-repeat center center',
+            'background-size':'cover'
+        })
+    }
+
+    $("#tailpage .template-image").css({
+        'background':'url("'+imageUrl+'") no-repeat center center',
+        'background-size':'cover'
+    })
+
+    $("#canvas-image .template-image").css({
+        'background':'url("'+imageUrl+'") no-repeat center center',
+        'background-size':'cover'
+    })
+}
