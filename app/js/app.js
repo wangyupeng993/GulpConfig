@@ -9,19 +9,6 @@ window.onload = function (){
             selectors: ['.my-page']
         }
     }
-    Pace.on('start', function (){
-        console.log('pace 开始加载！')
-    })
-    Pace.on('stop', function (){
-        console.log('pace 停止加载！')
-    })
-    Pace.on('restart', function (){
-        console.log('pace 重新加载！')
-    })
-    Pace.on('done', function (){
-        console.log('pace 加载完成！')
-    })
-    Pace.on('hide', function (){})
     canvasLoading()
     getGlasses()
     PlayVideoKai()
@@ -167,7 +154,12 @@ function bossKai(){
             slideChangeTransitionStart:function (){
                 Files = null
                 $('#BossKai .scene-wrapper .boss-photo-frame').find('button').show()
-                $('#BossKai .swiper-wrapper .glasses-choice').attr('src','')
+                $('.Glasses-url').removeClass('glasses-choice')
+                $('#BossKai .boss-photo-frame .sun-glasses').css({
+                    'background':'url("") no-repeat center center',
+                    'background-size':'cover'
+                })
+
             },
             // 切换结束
             slideChangeTransitionEnd:function (){
@@ -335,11 +327,7 @@ function bossKai(){
         }
     });
 
-    uploadFile(function (isIndex,base64Url){
-        requestAjax(isIndex,base64Url,templateImage[isIndex], function(isIndex,imageUrl){
-            AjaxResult("#BossKai .scene-wrapper .boss-photo-frame",isIndex,imageUrl)
-        })
-    })
+    uploadFile(templateImage,'#BossKai .scene-wrapper .boss-photo-frame')
 }
 // 学生凯
 function SchoolLeaderKai(){
@@ -374,7 +362,11 @@ function SchoolLeaderKai(){
             slideChangeTransitionStart:function (){
                 Files = null
                 $('#SchoolLeaderKai .scene-wrapper .school-photo-frame').find('button').show()
-                $('#SchoolLeaderKai .swiper-wrapper .glasses-choice').attr('src','')
+                $('.Glasses-url').removeClass('glasses-choice')
+                $('#SchoolLeaderKai .school-photo-frame .optics-glasses').css({
+                    'background':'url("") no-repeat center center',
+                    'background-size':'100% 100%'
+                })
             },
             // 切换结束
             slideChangeTransitionEnd:function (){
@@ -544,11 +536,7 @@ function SchoolLeaderKai(){
         }
     });
 
-    uploadFile(function (isIndex,base64Url){
-        requestAjax(isIndex,base64Url,templateImage[isIndex], function(isIndex,imageUrl){
-            AjaxResult("#SchoolLeaderKai .scene-wrapper .school-photo-frame",isIndex,imageUrl)
-        })
-    })
+    uploadFile(templateImage,'#SchoolLeaderKai .scene-wrapper .school-photo-frame')
 }
 // 播放视频
 function PlayVideoKai(){
@@ -581,6 +569,7 @@ function PlayVideoKai(){
 
         BossKiaVideo.addEventListener('ended',function (){
             bossKai()
+            $('#music-on').show()
             $('.video-list').hide()
             $("#BossKai-video").hide()
             $("#BossKai").show()
@@ -604,6 +593,7 @@ function PlayVideoKai(){
 
         SchoolKaiVideo.addEventListener('ended',function (){
             SchoolLeaderKai()
+            $('#music-on').show()
             $('.video-list').hide()
             $("#SchoolKai-video").hide()
             $("#SchoolLeaderKai").show(0,function (){})
@@ -765,23 +755,29 @@ function uploadloadingHide(){
     $('.upload-loading').css({'z-index':'0','display':'none'})
 }
 // 获取文件
-function uploadFile(callback){
+function uploadFile(template,objkai,callback){
     $('.slide-container .phototemplate button').find('input').on('change',function (){
+        const filePath = $(this).val()
+        const ImageFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase()
         const isIndex = Number(this.getAttribute("isINdex"))
         const reader = new FileReader();
+        const ObjKai = objkai
         Files = this.files[0]
-        let base64Url = null
-        reader.readAsDataURL(Files)
-        uploadloadingShow()
-        reader.onload = function (e){
-            base64Url = reader.result
-            callback&&callback(isIndex,base64Url)
+
+        if (!ImageFormat.match(/.png|.jpg|.jpeg/)){
+            dialog('上传错误,文件格式必须为：png/jpg/jpeg')
+            return false
         }
+        compressImage(isIndex,template,Files,function (isIndex,template,imageBase64){
+            requestAjax(isIndex,imageBase64,template,function (isIndex,imgUrl){
+                AjaxResult(ObjKai,isIndex,imgUrl)
+            })
+        })
     })
 }
 // ajax请求
 function requestAjax(isIndex,image,template,callback){
-    console.log(isIndex,image,template)
+    $('.slide-container .phototemplate button').find('input').val('');
     $.ajax({
         type: "POST",
         url:'https://farm.xmluma.cn/EPF_Up_Img/index.php?c=upload',
@@ -798,7 +794,6 @@ function requestAjax(isIndex,image,template,callback){
         },
         error:function (error){
             console.log(error)
-            callback&&callback(isIndex,imgUrl)
         }
     })
 }
@@ -829,3 +824,50 @@ function AjaxResult(obj,isIndex,imageUrl){
         'background-size':'cover'
     })
 }
+
+// 压缩图片
+function compressImage(isIndex,template,files,callback){
+    let newImage = new Image()
+    const reader = new FileReader();
+    let [imageWidth,imageHeight,offsetX,offsetY,data] = [0,0,0,0,''];
+    uploadloadingShow()
+    reader.readAsDataURL(files)
+    reader.onload = function (e){
+        const canvas = document.querySelector('#compressimage');
+        const context = canvas.getContext('2d');
+        canvas.width = $('.slide-container').eq(0).width()
+        canvas.height = $('.phototemplate').eq(0).innerHeight()
+        context.clearRect(0, 0, canvas.width, canvas.height)
+        newImage.src = e.target.result
+        newImage.onload = function (){
+            context.drawImage(this,0,0,canvas.width,canvas.height)
+            let data = canvas.toDataURL('image/png',0.3)
+            callback&&callback(isIndex,template[isIndex],data)
+        }
+    }
+}
+
+// context.drawImage(this,0,0,canvas.width,canvas.height)
+// if(Orientation != "" && Orientation != 1){
+//     switch(Orientation){
+//         case 6://需要顺时针（向左）90度旋转
+//             alert('需要顺时针（向左）90度旋转');
+//             rotateImage(Image,'left',canvas);
+//             break;
+//         case 8://需要逆时针（向右）90度旋转
+//             alert('需要顺时针（向右）90度旋转');
+//             rotateImage(Image,'right',canvas);
+//             break;
+//         case 3://需要180度旋转
+//             alert('需要180度旋转');
+//             rotateImage(Image,'right',canvas);//转两次
+//             rotateImage(Image,'right',canvas);
+//         break;
+//     }
+// }
+
+// EXIF.getData(files,function (){
+//     EXIF.getAllTags(this);
+//     Orientation = EXIF.getTag(this, 'Orientation');
+//     console.log(Orientation)
+// })
