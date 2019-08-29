@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>BOLONG暴龙眼镜</title>
+    <title>asdasdasdasd</title>
     <link rel="stylesheet" href="/css/app.css?v=2.9">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css?v=2.9">
+    <link rel="stylesheet" href="/css/icon.css?v=2.9">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <script>
         (function (){
@@ -15,314 +16,105 @@
             html.style.fontSize = htmlW /16 + 'px';
         })();
     </script>
-    <script src="http://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
-    <script src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
-    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script src="/js/BetterScroll.js"></script>
 </head>
 <body>
-    <div id="container">
-        <audio id="audio" src="./music/bg.mp3" preload></audio>
-        <div id="music-on"></div>
-        <!-- 操作提示弹窗 -->
-        <div class="operation-tips position">
-            <p>您还没有选择照片哦~</p>
-        </div>
-        <div class="upload-loading position">
-            <img src="./images/loading/loading.gif" alt="" />
-        </div>
-        <div class="loading position">
-            <div id="myCanvas">
-                <canvas>当前浏览器不支持canvas组件请升级！</canvas>
+    <div id="container" class="wrapper el-main">
+        <div class="content">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide relative">
+                        <img src="./images/cip_ml_pic851b9f31-30b6-4869-84ad-be062748108a.jpeg" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./images/cip_ml_pic2c91c90b-8d7b-4df3-b239-3b6b3aba9a2b.jpeg" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./images/cip_ml_pic9ec78bfb-2cba-4879-9ae5-6118cb12329a.jpeg" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./images/cip_ml_pice1dce776-2c31-4c59-9498-d6e28b77c3a2.jpeg" alt="" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./images/cip_ml_picab60bb2d-c2c7-4502-bfac-8ece4576d76a.jpeg" alt="" />
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
-        </div>
-        <div id="guide">
-            <section>
-                <div class="bosss-kai"></div>
-                <div class="School-leader"></div>
-                <div class="bosss-button">
-                    <div></div>
+            <div class="padding-lr-sm padding-tb-xs bg-red flex">
+                <div class="basis-df">
+                    <p class="text-white">
+                        <span class="text-size-xs">￥</span><span class="text-size-sm">99.00</span>
+                        <span class="text-white text-size-sm text-line-through" style="opacity:0.5;">
+                            ￥168.00
+                        </span>
+                    </p>
+                    <p class="text-size-xs text-white">
+                        <span class="margin-right-xs">已售</span>
+                        <span>81</span>
+                    </p>
                 </div>
-                <div class="School-button">
-                    <div></div>
+                <div class="basis-df">
+                    <p class="text-white text-size-xs text-right">距抢购结束</p>
+                    <p class="text-red text-size-xs text-right">
+                        <span class="inline-block padding-xs radius-sm bg-yellow">00</span>
+                        <span class="inline-block padding-tb-xs radius-sm text-yellow">天</span>
+                        <span class="inline-block padding-xs radius-sm bg-yellow">00</span>
+                        <span class="inline-block padding-tb-xs radius-sm text-yellow">时</span>
+                        <span class="inline-block padding-xs radius-sm bg-yellow">00</span>
+                        <span class="inline-block padding-tb-xs radius-sm text-yellow">分</span>
+                        <span class="inline-block padding-xs radius-sm bg-yellow">00</span>
+                        <span class="inline-block padding-tb-xs radius-sm text-yellow">秒</span>
+                    </p>
                 </div>
-            </section>
-        </div>
-        <div class="video-list position">
-            <video id="BossKai-video" autobufer="true" playsinline=""
-                   preload="auto" src="./video/5.mp4"
-                   webkit-playsinline="true" x-webkit-airplay="allow"
-                   x5-video-orientation="portrait" x5-video-player-fullscreen="true"
-                   x5-video-player-type="h5"></video>
-             <video id="SchoolKai-video" autobufer="true" playsinline=""
-            preload="auto" src="./video/6.mp4"
-            webkit-playsinline="true" x-webkit-airplay="allow"
-            x5-video-orientation="portrait" x5-video-player-fullscreen="true"
-            x5-video-player-type="h5"></video>
-        </div>
-        <!-- boss凯 -->
-        <div id="BossKai" class="boss-kai-container swiper">
-            <section class="swiper-wrapper scene-wrapper">
-                <div class="swiper-slide scene-slide">
-                    <section class="slide-container">
-                        <div class="phototemplate boss-photo-frame">
-                            <div class="position"></div>
-                            <div class="sun-glasses"></div>
-                            <button>
-                                <input type="file" isIndex="0" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
-                            </button>
+            </div>
+            <div class="padding-lr-sm padding-tb-xs">
+                <p class="text-size-sm text-justify">限时特惠！99元正品青钱柳叶茶霜后桑叶茶袋泡茶组合花茶</p>
+                <p class="text-size-xs text-red padding-tb-sm">
+                    <span class="inline-block padding-xs"
+                          style="border:.01rem solid #fcb8b7;background-color:#fdf2f2;">全国包邮</span>
+                    <span class="inline-block padding-xs"
+                          style="border:.01rem solid #fcb8b7;background-color:#fdf2f2;">货到付款</span>
+                    <span class="inline-block padding-xs"
+                          style="border:.01rem solid #fcb8b7;background-color:#fdf2f2;">多买多送</span>
+                </p>
+                <div class="padding-tb-lg solid-bottom">
+                    <div class="buy-now-container flex text-white text-size-sm">
+                        <div class="basis-xs text-center">好品质</div>
+                        <div class="basis-xl text-center">
+                            <i class="cuIcon-cart"></i>
+                            <span>限时特惠，多买多送</span>
                         </div>
-                        <div class="boss-scene-slide1 glasses">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL3019.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7039.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7052.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7055.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7076.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL8068.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glasses-button glasses-button-prev boss-glasses1-prev"></div><!--左箭头-->
-                        <div class="glasses-button glasses-button-next boss-glasses1-next"></div><!--右箭头-->
-                    </section>
+                    </div>
                 </div>
-                <div class="swiper-slide scene-slide">
-                    <section class="slide-container">
-                        <div class="phototemplate  boss-photo-frame">
-                            <div class="position"></div>
-                            <div class="sun-glasses"></div>
-                            <button>
-                                <input type="file" isIndex="1" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
-                            </button>
-                        </div>
-                        <div class="boss-scene-slide2 glasses">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL3019.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7039.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7052.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7055.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7076.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL8068.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glasses-button glasses-button-prev boss-glasses2-prev"></div><!--左箭头-->
-                        <div class="glasses-button glasses-button-next boss-glasses2-next"></div><!--右箭头-->
-                    </section>
+                <div class="padding-tb-sm flex text-size-sm">
+                    <div class="margin-right-sm" style="width:2rem;">服务</div>
+                    <div class="basis-xxl text-size-xs">
+                        <span class="margin-lr-xs">
+                            <i class="cuIcon-roundcheck text-red"></i>
+                            <i class="text-grey">消费者保障服务</i>
+                        </span>
+                        <span class="margin-lr-xs">
+                            <i class="cuIcon-roundcheck text-red"></i>
+                            <i class="text-grey">包邮</i>
+                        </span>
+                        <span class="margin-lr-xs">
+                            <i class="cuIcon-roundcheck text-red"></i>
+                            <i class="text-grey">货到付款</i>
+                        </span>
+                        <span class="margin-lr-xs">
+                            <i class="cuIcon-roundcheck text-red"></i>
+                            <i class="text-grey">7天退换</i>
+                        </span>
+                        <span class="margin-lr-xs">
+                            <i class="cuIcon-roundcheck text-red"></i>
+                            <i class="text-grey">假一赔三</i>
+                        </span>
+                    </div>
                 </div>
-                <div class="swiper-slide scene-slide">
-                    <section class="slide-container">
-                        <div class="phototemplate  boss-photo-frame">
-                            <div class="position"></div>
-                            <div class="sun-glasses"></div>
-                            <button>
-                                <input type="file" isIndex="2" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
-                            </button>
-                        </div>
-                        <div class="boss-scene-slide3 glasses">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL3019.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7039.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7052.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7055.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL7076.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="./images/BossGlasses/BL8068.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glasses-button glasses-button-prev boss-glasses3-prev"></div><!--左箭头-->
-                        <div class="glasses-button glasses-button-next boss-glasses3-next"></div><!--右箭头-->
-                    </section>
-                </div>
-            </section>
-            <div class="swiper-button-prev boss-button-prev"></div><!--左箭头-->
-            <div class="swiper-button-next boss-button-next"></div><!--右箭头-->
-        </div>
-        <div class="bosskai-tips position"></div>
-         <!--学生凯-->
-        <div id="SchoolLeaderKai" class="school-kai-container swiper">
-            <section class="swiper-wrapper scene-wrapper">
-                <div class="swiper-slide scene-slide">
-                    <section class="slide-container">
-                        <div class="phototemplate school-photo-frame">
-                            <div class="position"></div>
-                            <div class="optics-glasses"></div>
-                            <button>
-                                <input type="file" isIndex="0" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
-                            </button>
-                        </div>
-                        <div class="school-scene-slide1 glasses">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ3056.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7039.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7098.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ6036.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glasses-button glasses-button-prev Schoo-glasses1-prev"></div><!--左箭头-->
-                        <div class="glasses-button glasses-button-next Schoo-glasses1-next"></div><!--右箭头-->
-                    </section>
-                </div>
-                <div class="swiper-slide scene-slide">
-                    <section class="slide-container">
-                        <div class="phototemplate school-photo-frame">
-                            <div class="position"></div>
-                            <div class="optics-glasses"></div>
-                            <button>
-                                <input type="file" isIndex="1" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
-                            </button>
-                        </div>
-                        <div class="school-scene-slide2 glasses">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ3056.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7039.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7098.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ6036.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glasses-button glasses-button-prev Schoo-glasses2-prev"></div><!--左箭头-->
-                        <div class="glasses-button glasses-button-next Schoo-glasses2-next"></div><!--右箭头-->
-                    </section>
-                </div>
-                <div class="swiper-slide scene-slide">
-                    <section class="slide-container">
-                        <div class="phototemplate school-photo-frame">
-                            <div class="position"></div>
-                            <div class="optics-glasses"></div>
-                            <button>
-                                <input type="file" isIndex="2" value="" name="" accept="image/jpg,image/jpeg,image/png"/>
-                            </button>
-                        </div>
-                        <div class="school-scene-slide3 glasses">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ3056.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7039.png" alt="">
-                                    </div>
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ7098.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="glasses-min">
-                                        <img class="Glasses-url" src="images/SchoolGlasses/BJ6036.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glasses-button glasses-button-prev Schoo-glasses3-prev"></div><!--左箭头-->
-                        <div class="glasses-button glasses-button-next Schoo-glasses3-next"></div><!--右箭头-->
-                    </section>
-                </div>
-            </section>
-            <div class="swiper-button-prev School-button-prev"></div><!--左箭头-->
-            <div class="swiper-button-next School-button-next"></div><!--右箭头-->
-        </div>
-        <div class="Schoolkai-tips position"></div>
-        <!-- 生成图片html -->
-        <div id="canvas-image" class="position">
-            <section class="final-template">
-                <div class="template-image">
-                    <div class="position"></div>
-                    <div class="sun-optics-glasses"></div>
-                </div>
-            </section>
-        </div>
-        <!-- 尾页 -->
-        <div id="tailpage" class="position">
-            <section class="final-template">
-                <div class="template-image">
-                    <div class="position"></div>
-                    <div class="sun-optics-glasses"></div>
-                </div>
-                <div class="SaveTips"></div>
-            </section>
-            <img class="save-image position" src="" alt="" />
-            <div class="share position"></div>
-        </div>
-        <!-- 选好了按钮 -->
-        <div class="choice-button">
-            <button></button>
-        </div>
-        <!-- get同款、分享按钮 -->
-        <div class="GetShare-button">
-            <button></button>
-            <button></button>
+            </div>
         </div>
     </div>
 <script src="/js/app.js?v=2.9"></script>
