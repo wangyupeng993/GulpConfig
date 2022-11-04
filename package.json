@@ -25,7 +25,7 @@
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "natives": "^1.1.6",
     "pump": "^3.0.0",
     "tencentcloud-sdk-nodejs": "^3.0.51"
